@@ -17,5 +17,7 @@ public abstract class Vector {
 
     public abstract boolean equals(Vector other);
 
+    public abstract Matrix toMatrix();
+
     public abstract String toString();
 }

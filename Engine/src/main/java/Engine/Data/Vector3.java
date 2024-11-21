@@ -129,6 +129,11 @@ public class Vector3 extends Vector {
     }
 
     @Override
+    public Matrix toMatrix() {
+        return new Matrix(3,1,new float[]{this.x,this.y,this.z});
+    }
+
+    @Override
     public String toString() {
         return String.format("Vector4(x=%.4f, y=%.4f, z=%.4f)", this.x, this.y, this.z);
     }
