@@ -11,6 +11,13 @@ public class Vector3 extends Vector {
         this.type = 3;
     }
 
+    public Vector3() {
+        this.x=0;
+        this.y=0;
+        this.z=0;
+        this.type=3;
+    }
+
     @Override
     public Vector3 add(Vector other) {
         if(other.type==this.type){
@@ -135,6 +142,19 @@ public class Vector3 extends Vector {
 
     @Override
     public String toString() {
-        return String.format("Vector4(x=%.4f, y=%.4f, z=%.4f)", this.x, this.y, this.z);
+        return String.format("Vector3(x=%.4f, y=%.4f, z=%.4f)", this.x, this.y, this.z);
+    }
+
+    @Override
+    public Vector cross(Vector other) {
+        if (other.type!=3){
+            throw new IllegalArgumentException("the vectors should both be Vector3");
+        }
+        Vector3 temp = (Vector3) other;
+        Vector3 w = new Vector3();
+        w.x = this.y*temp.z - this.z*temp.y;
+        w.y = this.z*temp.x-this.x*temp.z;
+        w.z = this.x*temp.y-this.y*temp.x;
+        return w;
     }
 }

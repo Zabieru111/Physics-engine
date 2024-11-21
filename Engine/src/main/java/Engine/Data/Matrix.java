@@ -15,6 +15,15 @@ public class Matrix {
         this.det = findDet(this.matrix);
         this.invDet = 1/this.det;
     }
+    public Matrix(int n){
+        this.n = n;
+        this.m = n;
+        this.matrix = new float[this.n][this.m];
+        for (int i = 0;i<n;++i){
+            this.matrix[i][i] = 1f;
+        }
+
+    }
 
     public Matrix(int n, int m, float[] values) {
         if(n * m == values.length) {
@@ -213,5 +222,15 @@ public class Matrix {
             return find4x4Det(matrix);
         }
         return LU(matrix);
+    }
+    public Matrix identity(){
+        if (this.n!=this.m){
+            throw new IllegalArgumentException("Matrix must be square to set it as an identity matrix");
+        }
+        this.matrix = new float[this.n][this.m];
+        for (int i = 0;i<n;++i){
+                    this.matrix[i][i] = 1;
+            }
+        return this;
     }
 }

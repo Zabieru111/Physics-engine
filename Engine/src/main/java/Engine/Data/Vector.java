@@ -20,4 +20,6 @@ public abstract class Vector {
     public abstract Matrix toMatrix();
 
     public abstract String toString();
+
+    public abstract Vector cross(Vector other);
 }

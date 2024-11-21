@@ -22,6 +22,14 @@ public class Vector4 extends Vector {
         this.type = 4;
     }
 
+    public Vector4() {
+        this.x=0;
+        this.y=0;
+        this.z=0;
+        this.w=1;
+        this.type=4;
+    }
+
     @Override
     public Vector4 add(Vector other) {
         if (other.type == this.type) {
@@ -157,5 +165,19 @@ public class Vector4 extends Vector {
     @Override
     public String toString() {
         return String.format("Vector4(x=%.4f, y=%.4f, z=%.4f, w=%.4f)", this.x, this.y, this.z, this.w);
+    }
+
+    @Override
+    public Vector cross(Vector other) {
+        Vector4 w = new Vector4();
+        if (other.type!=4){
+            throw new IllegalArgumentException("the vectors should both be Vector4");
+        }
+            Vector4 temp = (Vector4) other;
+            w.x = this.y*temp.z - this.z*temp.y;
+            w.y = this.z*temp.x-this.x*temp.z;
+            w.z = this.x*temp.y-this.y*temp.x;
+            w.w = 0;
+        return w;
     }
 }
