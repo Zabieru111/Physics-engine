@@ -50,12 +50,4 @@ public class Sphere extends Geometry{
         return vertices;
     }
 
-    @Override
-    public void translate(float dx, float dy, float dz) {
-        this.matrix.matrix[0][3]+=dx;
-        this.matrix.matrix[1][3]+=dy;
-        this.matrix.matrix[2][3]+=dz;
-
-        this.position = this.matrix.dot(this.position);
-    }
 }

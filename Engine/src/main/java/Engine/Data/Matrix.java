@@ -33,10 +33,8 @@ public class Matrix {
             for (int i = 0; i < values.length; ++i) {
                 this.matrix[i / m][i % m] = values[i];
             }
-            long start = System.nanoTime();
             this.det = findDet(this.matrix);
             this.invDet = 1/this.det;
-            System.out.println((System.nanoTime()-start)/1000);
         }
     }
     public Matrix transpose(){
@@ -251,5 +249,38 @@ public class Matrix {
                     this.matrix[i][i] = 1;
             }
         return this;
+    }
+    public void resize(int n,int m){
+        if (n<=0 || m<=0){
+            throw new IllegalArgumentException(String.format("Dimension [%dx%d] are invalid",n,m));
+        }
+        float[][]resized = new float[n][m];
+        for (int i=0;i<n;++i){
+            for (int j=0;j<m;++j){
+                if (i < this.n && j < this.m){
+                    resized[i][j] = this.matrix[i][j];
+                }
+                else if (i == j&& n==m){
+                    resized[i][j] = 1;
+                }
+            }
+        }
+        this.n = n;
+        this.m = m;
+        this.matrix = resized;
+    }
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < this.n; i++) {
+            for (int j = 0; j < this.m; j++) {
+                sb.append(String.format("%.6f", this.matrix[i][j]));
+                if (j < this.m - 1) {
+                    sb.append("\t");
+                }
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 }
