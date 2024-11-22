@@ -1,15 +1,14 @@
 package Engine.Geometry;
 
+import Engine.Data.Matrix;
 import Engine.Data.Vector3;
 
 
-public class Sphere {
-    public Vector3 position;
+public class Sphere extends Geometry{
     public float radius;
     private final int widthSegment;
     private final int heightSegment;
 
-    public Vector3[] vertices;
 
 
     public Sphere(float r,int width_segment,int height_segment) {
@@ -17,9 +16,14 @@ public class Sphere {
         this.radius = r;
         this.widthSegment = width_segment;
         this.heightSegment = height_segment;
-        this.vertices = new Vector3[2+(this.heightSegment-1)*this.widthSegment];
+        this.orientation = new Vector3[3];
+        this.orientation[0] = new Vector3(1,0,0);
+        this.orientation[1] = new Vector3(0,1,0);
+        this.orientation[2] = new Vector3(0,0,1);
+        this.matrix = new Matrix(4);
     }
-    private void findVertices(){
+    private Vector3[] findVertices(){
+        Vector3[]vertices = new Vector3[2+(this.heightSegment-1)*this.widthSegment];
         long start = System.nanoTime();
         int index = 0;
         vertices[index++] = new Vector3(0,this.radius,0);
@@ -43,5 +47,15 @@ public class Sphere {
         }
         vertices[index] = new Vector3(0,-this.radius,0);
         System.out.println((float)(System.nanoTime()-start)/1000000);
+        return vertices;
+    }
+
+    @Override
+    public void translate(float dx, float dy, float dz) {
+        this.matrix.matrix[0][3]+=dx;
+        this.matrix.matrix[1][3]+=dy;
+        this.matrix.matrix[2][3]+=dz;
+
+        this.position = this.matrix.dot(this.position);
     }
 }

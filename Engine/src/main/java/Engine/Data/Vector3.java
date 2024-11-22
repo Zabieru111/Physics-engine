@@ -157,4 +157,9 @@ public class Vector3 extends Vector {
         w.z = this.x*temp.y-this.y*temp.x;
         return w;
     }
+    public void set(float x,float y,float z){
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
 }

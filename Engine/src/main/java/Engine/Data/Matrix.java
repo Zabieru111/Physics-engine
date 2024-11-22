@@ -115,6 +115,25 @@ public class Matrix {
         }
         return new Matrix(result);
     }
+    public Vector3 dot(Vector3 vector3){
+        if (this.n==4 && this.m==4) {
+            float tempx = this.matrix[0][0] * vector3.x + this.matrix[0][1] * vector3.y + this.matrix[0][2] * vector3.z + this.matrix[0][3];
+            float tempy = this.matrix[1][0] * vector3.x + this.matrix[1][1] * vector3.y + this.matrix[1][2] * vector3.z + this.matrix[1][3];
+            float tempz = this.matrix[2][0] * vector3.x + this.matrix[2][1] * vector3.y + this.matrix[2][2] * vector3.z + this.matrix[2][3];
+            return new Vector3(tempx, tempy, tempz);
+        }
+        return null;
+    }
+    public Vector4 dot(Vector4 vector4){
+        if (this.n==4 && this.m==4) {
+            float tempx = this.matrix[0][0] * vector4.x + this.matrix[0][1] * vector4.y + this.matrix[0][2] * vector4.z + this.matrix[0][3] * vector4.w;
+            float tempy = this.matrix[1][0] * vector4.x + this.matrix[1][1] * vector4.y + this.matrix[1][2] * vector4.z + this.matrix[1][3] * vector4.w;
+            float tempz = this.matrix[2][0] * vector4.x + this.matrix[2][1] * vector4.y + this.matrix[2][2] * vector4.z + this.matrix[2][3] * vector4.w;
+            float tempw = this.matrix[3][0] * vector4.x + this.matrix[3][1] * vector4.y + this.matrix[3][2] * vector4.z + this.matrix[3][3] * vector4.w;
+            return new Vector4(tempx, tempy, tempz, tempw);
+        }
+        return null;
+    }
     public Matrix add_Scalar(float scalar){
         float[][] result = new float[n][m];
         for (int i = 0;i<this.n;++i){
