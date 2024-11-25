@@ -146,7 +146,7 @@ public class Vector3 extends Vector {
     }
 
     @Override
-    public Vector cross(Vector other) {
+    public Vector3 cross(Vector other) {
         if (other.type!=3){
             throw new IllegalArgumentException("the vectors should both be Vector3");
         }
@@ -155,7 +155,7 @@ public class Vector3 extends Vector {
         w.x = this.y*temp.z - this.z*temp.y;
         w.y = this.z*temp.x-this.x*temp.z;
         w.z = this.x*temp.y-this.y*temp.x;
-        return w;
+        return w.normalize();
     }
     public void set(float x,float y,float z){
         this.x = x;

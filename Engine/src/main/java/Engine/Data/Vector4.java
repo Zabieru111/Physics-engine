@@ -168,7 +168,7 @@ public class Vector4 extends Vector {
     }
 
     @Override
-    public Vector cross(Vector other) {
+    public Vector4 cross(Vector other) {
         Vector4 w = new Vector4();
         if (other.type!=4){
             throw new IllegalArgumentException("the vectors should both be Vector4");
@@ -178,6 +178,6 @@ public class Vector4 extends Vector {
             w.y = this.z*temp.x-this.x*temp.z;
             w.z = this.x*temp.y-this.y*temp.x;
             w.w = 0;
-        return w;
+        return w.normalize();
     }
 }
