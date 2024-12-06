@@ -30,7 +30,12 @@ public class Quaternion {
         float z = this.w*q2.z+this.x*q2.y-this.y*q2.x+this.z*q2.w;
         return new Quaternion(w,x,y,z);
     }
-
+    public void set(float x,float y,float z,float w){
+        this.w = w;
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
     public void setFromAngle(float angle, Vector3 axis) {
         float half_angle = angle / 2;
         float cos = (float) Math.cos(half_angle);
@@ -43,8 +48,6 @@ public class Quaternion {
 
     public void setFromAxis(Vector3 axis1, Vector3 axis2) {
         float angle = (float) Math.acos(axis1.dot(axis2));
-        System.out.println(angle*180/Math.PI);
-
         this.setFromAngle(angle,axis1.cross(axis2));
     }
 
@@ -86,5 +89,35 @@ public class Quaternion {
     @Override
     public String toString() {
         return String.format("Quaternion(w=%.4f,x=%.4f, y=%.4f, z=%.4f)",this.w,this.x,this.y,this.z);
+    }
+    public void mulScalar(float scalar){
+        this.w*=scalar;
+        this.x*=scalar;
+        this.y*=scalar;
+        this.z*=scalar;
+    }
+    public void setFromMatrix(float [][] m){
+        float t;
+        if(m[2][2]<0){
+            if(m[1][1]<m[0][0]){
+                t = 1 + m[0][0] - m[1][1] - m[2][2];
+                this.set(t,m[0][1]+m[1][0],m[2][0]+m[0][2],m[1][2]-m[2][1]);
+            }
+            else{
+                t = 1 - m[0][0] + m[1][1] - m[2][2];
+                this.set(m[0][1]+m[1][0],t,m[1][2]+m[2][1],m[2][0]-m[0][2]);
+            }
+        }
+        else{
+            if (m[0][0] < -m[1][1]){
+                t = 1 - m[0][0]-m[1][1]+m[2][2];
+                this.set(m[2][0]+m[0][2],m[1][2]+m[2][1],t,m[0][1]-m[1][0]);
+            }
+            else {
+                t = 1 + m[0][0]+m[1][1]+m[2][2];
+                this.set(m[1][2]-m[2][1],m[2][0]-m[0][2],m[0][1]-m[1][0],t);
+            }
+        }
+        this.mulScalar((float)(0.5/Math.sqrt(t)));
     }
 }

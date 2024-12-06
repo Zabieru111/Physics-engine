@@ -1,6 +1,7 @@
 package Engine.Geometry;
 
 import Engine.Data.Matrix;
+import Engine.Data.Quaternion;
 import Engine.Data.Vector;
 import Engine.Data.Vector3;
 
@@ -64,5 +65,9 @@ public abstract class Geometry {
         R.resize(4,4);
         this.matrix = this.matrix.dot(R);
     }
+    public void applyQuaternion(Quaternion q){
+        this.matrix = this.matrix.dot(q.getRotationMatrix());
+    }
+    //public abstract Vector3[] findVertices();
 
 }

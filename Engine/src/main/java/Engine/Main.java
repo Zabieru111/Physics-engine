@@ -1,13 +1,16 @@
 package Engine;
 
 import Engine.Data.*;
-import Engine.Geometry.Sphere;
+import Engine.Geometry.*;
+import Engine.Renderer.Camera;
+import Engine.Renderer.Renderer;
 
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-
+        PlaneGeometry planeGeometry = new PlaneGeometry(1000,1000,2,2);
+        SphereGeometry sphereGeometry = new SphereGeometry(1000,64,64);
+        sphereGeometry.findVertices();
+        System.out.println("---DONE---");
     }
 }
